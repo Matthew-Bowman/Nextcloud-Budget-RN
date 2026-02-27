@@ -13,7 +13,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.NextcloudBudgetRN"
+      "bundleIdentifier": "com.anonymous.NextcloudBudgetRN",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0b6a38e1-3a31-412f-a6f6-56126ebac17b"
+      }
     }
   }
 }
