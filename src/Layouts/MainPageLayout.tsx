@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { Slot } from "expo-router";
-import { useTheme } from "../Theme/ThemeProvider";
+import { useTheme } from "@/Theme/ThemeProvider";
 
 export default function MainPageLayout() {
   const { colors } = useTheme();

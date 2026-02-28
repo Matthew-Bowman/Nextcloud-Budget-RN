@@ -1,5 +1,5 @@
-import { View, Text, useColorScheme } from 'react-native';
-import { useTheme } from '../../../src/Theme/ThemeProvider';
+import { Text, useColorScheme } from 'react-native';
+import { useTheme } from '@/Theme/ThemeProvider';
 
 export default function Home() {
 

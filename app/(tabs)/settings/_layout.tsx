@@ -1,5 +1,4 @@
-import { Stack } from "expo-router";
-import MainPageLayout from "../../../src/Layouts/MainPageLayout";
+import MainPageLayout from "@/Layouts/MainPageLayout";
 
 export default function SettingsLayout() {
     return (

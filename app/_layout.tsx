@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ThemeProvider, useTheme } from "../src/Theme/ThemeProvider";
+import { ThemeProvider, useTheme } from "@/Theme/ThemeProvider";
 
 function AppContent() {
   const { theme } = useTheme();
