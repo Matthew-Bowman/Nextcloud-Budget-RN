@@ -7,11 +7,11 @@ export default function Home() {
   const { theme, preference, isLoading, colors } = useTheme();
 
   return (
-    <View style={{flex: 1, backgroundColor: colors.background}}>
-      <Text style={{color: colors.mainText}}>Theme - {theme}</Text>
-      <Text style={{color: colors.mainText}}>Preference - {preference}</Text>
-      <Text style={{color: colors.mainText}}>Is Loading - {isLoading ? 'True' : 'False'}</Text>
-      <Text style={{color: colors.mainText}}>System Theme - {sysTheme}</Text>
-    </View>
+    <>
+      <Text style={{ color: colors.mainText }}>Theme - {theme}</Text>
+      <Text style={{ color: colors.mainText }}>Preference - {preference}</Text>
+      <Text style={{ color: colors.mainText }}>Is Loading - {isLoading ? 'True' : 'False'}</Text>
+      <Text style={{ color: colors.mainText }}>System Theme - {sysTheme}</Text>
+    </>
   );
 }

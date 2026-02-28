@@ -1,25 +1,22 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
-import { NativeTabs } from 'expo-router/build/native-tabs';
+import { useTheme } from '../../src/Theme/ThemeProvider';
 
 export default function TabsLayout() {
 
-    // return (
-    //     <NativeTabs>
-    //         <NativeTabs.Trigger name="home">
-    //             <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-    //             <NativeTabs.Trigger.Icon sf="house.fill" md="home" />
-    //         </NativeTabs.Trigger>
-    //         <NativeTabs.Trigger name="settings">
-    //             <NativeTabs.Trigger.Icon sf="gear" md="settings" />
-    //             <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
-    //         </NativeTabs.Trigger>
-    //     </NativeTabs>
-    // );
+    const { colors } = useTheme();
 
     return (
+
         <Tabs
             screenOptions={({ route }) => ({
+                // Tab Bar
+                tabBarActiveTintColor: colors.accent,
+                tabBarStyle: {
+                    backgroundColor: colors.surface,
+                    borderTopColor: colors.decoration,
+                },
+
                 tabBarIcon: ({ color, size }) => {
                     let iconName: any;
 
@@ -38,7 +35,17 @@ export default function TabsLayout() {
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
 
-                headerShown: false,
+                // Header
+                headerShown: true,
+
+                headerStyle: {
+                    backgroundColor: colors.surface,
+                },
+                headerShadowVisible: false,
+
+                headerTitleStyle: {
+                    color: colors.mainText
+                }
             })}
         >
             <Tabs.Screen
