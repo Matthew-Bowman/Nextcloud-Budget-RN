@@ -1,17 +1,24 @@
 export const light = {
-  background: "#ffffff",
-  surface: "#f5f5f5",
-  textPrimary: "#111111",
-  textSecondary: "#666666",
-  border: "#e5e5e5",
-  accent: "#2f80ed",
+    background: '#F7F8FA',
+    surface: '#FFFFFF',
+    decoration: '#E9ECF1',
+    accent: '#9B36F5',
+    accentLight: '#B14CFF',
+    accentDark: '#7E2DC7',
+    mainText: '#1B1E21',
+    mutedText: '#5F6368',
+    disabled: '#C6C6C6',
 };
 
+
 export const dark = {
-  background: "#000000",
-  surface: "#111111",
-  textPrimary: "#ffffff",
-  textSecondary: "#aaaaaa",
-  border: "#222222",
-  accent: "#4f9cff",
+    background: '#1B1E21',
+    surface: '#26292C',
+    decoration: '#313437',
+    accent: '#9B36F5',
+    accentLight: '#B14CFF',
+    accentDark: '#7E2DC7',
+    mainText: '#E4E4E4',
+    mutedText: '#A0A0A0',
+    disabled: '#5E5E5E',
 };

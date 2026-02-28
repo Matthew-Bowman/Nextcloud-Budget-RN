@@ -8,10 +8,10 @@ export default function Home() {
 
   return (
     <View>
-      <Text>Home Screen - {theme}</Text>
-      <Text>Home Screen - {preference}</Text>
-      <Text>Home Screen - {isLoading ? 'True' : 'False'}</Text>
-      <Text>Home Screen - {sysTheme}</Text>
+      <Text>Theme - {theme}</Text>
+      <Text>Preference - {preference}</Text>
+      <Text>Is Loading - {isLoading ? 'True' : 'False'}</Text>
+      <Text>System Theme - {sysTheme}</Text>
     </View>
   );
 }

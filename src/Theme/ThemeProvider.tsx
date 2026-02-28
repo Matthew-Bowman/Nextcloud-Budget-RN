@@ -8,7 +8,7 @@ type Theme = "light" | "dark";
 type ThemeContextType = {
     theme: Theme,
     preference: ThemePreference,
-    setPreference: (value: Theme) => void;
+    setPreference: (value: ThemePreference) => void;
     isLoading: boolean;
 }
 
