@@ -1,17 +1,24 @@
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { ThemeProvider } from '../src/Theme/ThemeProvider';
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider, useTheme } from "../src/Theme/ThemeProvider";
+
+function AppContent() {
+  const { theme } = useTheme();
+
+  return (
+    <>
+      <StatusBar style={theme === "dark" ? "light" : "dark"} />
+      <Stack screenOptions={{ headerShown: false }} />
+    </>
+  );
+}
 
 export default function Layout() {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-
-        <StatusBar style='dark' />
-        <Stack screenOptions={{ headerShown: false }} />
-      
+        <AppContent />
       </ThemeProvider>
     </SafeAreaProvider>
   );
