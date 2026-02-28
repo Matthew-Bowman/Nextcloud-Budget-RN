@@ -1,4 +1,16 @@
-export const light = {
+export type ColorTokens = {
+    background: string,
+    surface: string,
+    decoration: string,
+    accent: string,
+    accentLight: string,
+    accentDark: string,
+    mainText: string,
+    mutedText: string,
+    disabled: string,
+}
+
+const light: ColorTokens = {
     background: '#F7F8FA',
     surface: '#FFFFFF',
     decoration: '#E9ECF1',
@@ -11,7 +23,7 @@ export const light = {
 };
 
 
-export const dark = {
+const dark: ColorTokens = {
     background: '#1B1E21',
     surface: '#26292C',
     decoration: '#313437',
@@ -22,3 +34,5 @@ export const dark = {
     mutedText: '#A0A0A0',
     disabled: '#5E5E5E',
 };
+
+export const colors = {light, dark}
