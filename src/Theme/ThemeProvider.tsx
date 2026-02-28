@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useColorScheme } from 'react-native';
+import { colors, ColorTokens } from './tokens';
 
 type ThemePreference = "system" | "light" | "dark";
 type Theme = "light" | "dark";
@@ -10,6 +11,7 @@ type ThemeContextType = {
     preference: ThemePreference,
     setPreference: (value: ThemePreference) => void;
     isLoading: boolean;
+    colors: ColorTokens;
 }
 
 const ThemeContext = createContext<ThemeContextType | null>(null);
@@ -42,7 +44,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
 
     const value = useMemo(
-        () => ({ theme, preference, setPreference, isLoading }),
+        () => ({ theme, preference, setPreference, isLoading, colors: colors[theme] }),
         [theme, preference, isLoading]
     );
 
