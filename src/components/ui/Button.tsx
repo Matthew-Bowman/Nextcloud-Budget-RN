@@ -47,7 +47,7 @@ export default function Button({
             accessibilityState={{ disabled: isDisabled, busy: !!loading }}
         >
             {loading ? (
-                <ActivityIndicator color={colors.onAccent} />
+                <ActivityIndicator size={18} color={colors.onAccent} />
             ) : (
                 <Text variant="subheading" style={{
                     color: colors.onAccent,
