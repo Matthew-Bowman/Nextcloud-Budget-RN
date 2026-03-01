@@ -28,6 +28,9 @@ export default function TabsLayout() {
                         case 'settings':
                             iconName = 'settings';
                             break;
+                        case 'inputshowcase':
+                            iconName = 'eye';
+                            break;
                         default:
                             iconName = 'help';
                             break;
@@ -58,6 +61,10 @@ export default function TabsLayout() {
             <Tabs.Screen
                 name="settings"
                 options={{ title: 'Settings' }}
+            />
+            <Tabs.Screen
+                name="inputshowcase"
+                options={{ title: 'Input Showcase' }}
             />
         </Tabs>
     );
