@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import MainPageLayout from "@/layouts/MainPageLayout";
+import { View } from "react-native";
+import Text from "@/components/ui/Text";
 
 export default function SettingsScreen() {
     return (

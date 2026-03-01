@@ -1,37 +1,26 @@
-import { ScrollView, View } from "react-native";
-import MainPageLayout from "@/layouts/MainPageLayout";
+import { View } from "react-native";
 import Text from "@/components/ui/Text";
 import { useTheme } from "@/theme/ThemeProvider";
 import Button from "@/components/ui/Button";
 import { useAuth } from "@/auth/AuthProvider";
-import { spacing } from "@/theme/tokens";
 
-export default function HomescreenScreen() {
+export default function LoginScreen() {
 
     const { colors } = useTheme();
-    const { isLoggedIn, signIn, signOut } = useAuth()
+    const { signIn } = useAuth();
 
     return (
-        <View style={{gap: spacing.lg}}>
+        <View style={{width: '100%'}}>
             {/* BODY (default) */}
             <Text>
                 This is default body text.
             </Text>
-
-            <Text variant="title">{isLoggedIn ? "Logged In" : "Not Logged In"}</Text>
 
             <Button
                 title="Login"
                 onPress={() => {
                     console.log('Login Pressed and signIn called');
                     signIn();
-                }}
-            />
-            <Button
-                title="Logout"
-                onPress={() => {
-                    console.log('Login Pressed and signIn called');
-                    signOut();
                 }}
             />
         </View>

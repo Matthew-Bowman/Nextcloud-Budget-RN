@@ -49,10 +49,6 @@ export default function TabsLayout() {
                         {children}
                     </Text>
                 ),
-
-                headerTitleStyle: {
-                    color: colors.mainText
-                }
             })}
         >
             <Tabs.Screen
