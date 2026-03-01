@@ -59,4 +59,4 @@ export const spacing = {
   xxl: 40,
 };
 
-export type SpacingTokens = typeof spacing;
+export type SpacingTokens = keyof typeof spacing;
