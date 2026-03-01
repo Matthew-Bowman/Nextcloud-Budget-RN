@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    Platform,
     Text as RNText,
     TextProps as RNTextProps,
     StyleSheet,
@@ -19,24 +20,42 @@ const variantStyles: Record<TextVariant, TextStyle> = StyleSheet.create({
     body: {},
 
     subheading: {
-        fontWeight: "600",
+        fontFamily: Platform.select({
+            ios: 'Inter-SemiBold',
+            android: 'Inter_600SemiBold',
+        }),
     },
 
     heading: {
         fontSize: 24,
-        fontWeight: "600",
+
+        fontFamily: Platform.select({
+            ios: 'Inter-SemiBold',
+            android: 'Inter_600SemiBold',
+        }),
+
         lineHeight: 30,
     },
 
     title: {
         fontSize: 30,
-        fontWeight: "400",
+
+        fontFamily: Platform.select({
+            ios: 'Inter-Regular',
+            android: 'Inter_400Regular',
+        }),
+
         lineHeight: 36,
     },
 
     caption: {
         fontSize: 13,
-        fontWeight: "400",
+
+        fontFamily: Platform.select({
+            ios: 'Inter-Regular',
+            android: 'Inter_400Regular',
+        }),
+
         lineHeight: 18,
     },
 });
@@ -44,7 +63,12 @@ const variantStyles: Record<TextVariant, TextStyle> = StyleSheet.create({
 const baseStyles = StyleSheet.create({
     base: {
         fontSize: 16,
-        fontWeight: "400",
+
+        fontFamily: Platform.select({
+            ios: 'Inter-Regular',
+            android: 'Inter_400Regular',
+        }),
+
         lineHeight: 22,
     },
 });

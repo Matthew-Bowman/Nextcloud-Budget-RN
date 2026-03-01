@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 import { useTheme } from '@/theme/ThemeProvider';
+import Text from '@/components/ui/Text';
 
 export default function TabsLayout() {
 
@@ -42,6 +43,12 @@ export default function TabsLayout() {
                     backgroundColor: colors.surface,
                 },
                 headerShadowVisible: false,
+
+                headerTitle: ({ children }) => (
+                    <Text variant='heading'>
+                        {children}
+                    </Text>
+                ),
 
                 headerTitleStyle: {
                     color: colors.mainText
