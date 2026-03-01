@@ -1,4 +1,4 @@
-import MainPageLayout from "@/Layouts/MainPageLayout";
+import MainPageLayout from "@/layouts/MainPageLayout";
 
 export default function HomeLayout() {
 

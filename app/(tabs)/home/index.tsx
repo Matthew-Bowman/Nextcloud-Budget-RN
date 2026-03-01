@@ -1,5 +1,5 @@
 import { Text, useColorScheme } from 'react-native';
-import { useTheme } from '@/Theme/ThemeProvider';
+import { useTheme } from '@/theme/ThemeProvider';
 
 export default function Home() {
 
