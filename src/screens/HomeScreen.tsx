@@ -8,25 +8,12 @@ import { spacing } from "@/theme/tokens";
 
 export default function HomescreenScreen() {
 
-    const { colors } = useTheme();
-    const { isLoggedIn, signIn, signOut } = useAuth()
+    const { isLoggedIn, signOut } = useAuth()
 
     return (
         <View style={{gap: spacing.lg}}>
-            {/* BODY (default) */}
-            <Text>
-                This is default body text.
-            </Text>
-
             <Text variant="title">{isLoggedIn ? "Logged In" : "Not Logged In"}</Text>
 
-            <Button
-                title="Login"
-                onPress={() => {
-                    console.log('Login Pressed and signIn called');
-                    signIn();
-                }}
-            />
             <Button
                 title="Logout"
                 onPress={() => {
