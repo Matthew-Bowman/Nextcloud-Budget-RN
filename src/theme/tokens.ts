@@ -3,66 +3,60 @@
 //
 
 export type ColorTokens = {
-    background: string,
-    surface: string,
-    decoration: string,
-    accent: string,
-    accentLight: string,
-    accentDark: string,
-    mainText: string,
-    mutedText: string,
-    disabled: string,
-}
+  background: string;
+  surface: string;
+  decoration: string;
+  accent: string;
+  accentLight: string;
+  accentDark: string;
+  mainText: string;
+  mutedText: string;
+  disabled: string;
+};
 
 const light: ColorTokens = {
-    background: '#F7F8FA',
-    surface: '#FFFFFF',
-    decoration: '#E9ECF1',
-    accent: '#9B36F5',
-    accentLight: '#B14CFF',
-    accentDark: '#7E2DC7',
-    mainText: '#1B1E21',
-    mutedText: '#5F6368',
-    disabled: '#C6C6C6',
+  background: "#F7F8FA",
+  surface: "#FFFFFF",
+  decoration: "#E9ECF1",
+  accent: "#9B36F5",
+  accentLight: "#B14CFF",
+  accentDark: "#7E2DC7",
+  mainText: "#1B1E21",
+  mutedText: "#5F6368",
+  disabled: "#C6C6C6",
 };
-
 
 const dark: ColorTokens = {
-    background: '#1B1E21',
-    surface: '#26292C',
-    decoration: '#313437',
-    accent: '#9B36F5',
-    accentLight: '#B14CFF',
-    accentDark: '#7E2DC7',
-    mainText: '#E4E4E4',
-    mutedText: '#A0A0A0',
-    disabled: '#5E5E5E',
+  background: "#1B1E21",
+  surface: "#26292C",
+  decoration: "#313437",
+  accent: "#9B36F5",
+  accentLight: "#B14CFF",
+  accentDark: "#7E2DC7",
+  mainText: "#E4E4E4",
+  mutedText: "#A0A0A0",
+  disabled: "#5E5E5E",
 };
 
-export const colors = {light, dark}
-
-
-
-
+export const colors = { light, dark };
 
 //
 // Spacing Tokens
 //
 
-export type SpacingTokens = {
-  xs: number;
-  sm: number;
-  md: number;
-  lg: number;
-  xl: number;
-  xxl: number;
-};
-
-export const spacing: SpacingTokens = {
+export const spacing = {
+  /** xs - 4px */
   xs: 4,
+  /** sm - 8px */
   sm: 8,
+  /** md - 16px */
   md: 16,
+  /** lg - 24px */
   lg: 24,
+  /** xl - 32px */
   xl: 32,
+  /** xxl - 40px */
   xxl: 40,
 };
+
+export type SpacingTokens = typeof spacing;
