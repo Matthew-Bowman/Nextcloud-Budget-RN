@@ -66,6 +66,12 @@ export default function TabsLayout() {
                 name="inputshowcase"
                 options={{ title: 'Input Showcase' }}
             />
+            <Tabs.Screen
+                name="index"
+                options={{
+                    href: null,
+                }}
+            />
         </Tabs>
     );
 }
