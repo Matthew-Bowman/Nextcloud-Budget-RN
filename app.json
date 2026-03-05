@@ -63,7 +63,8 @@
             "node_modules/@expo-google-fonts/inter/900Black_Italic/Inter_900Black_Italic.ttf"
           ]
         }
-      ]
+      ],
+      "expo-web-browser"
     ]
   }
 }

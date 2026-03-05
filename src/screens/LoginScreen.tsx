@@ -1,15 +1,16 @@
 import { Alert, StyleSheet, View } from "react-native";
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
+import Input, { StatusType } from "@/components/ui/Input";
 import { spacing } from "@/theme/tokens";
 import { useState } from "react";
 import Text from "@/components/ui/Text";
 import { useAuth } from "@/auth/AuthProvider";
+import { Auth, Server } from "@/features/nextcloud";
+import { useFormValidation } from "@/hooks/useFormValidation";
+import { HttpError } from "@/core/http/client";
 
 type FormState = {
     host: string;
-    username: string;
-    appPassword: string;
 };
 
 export default function LoginScreen() {
@@ -18,64 +19,95 @@ export default function LoginScreen() {
 
     const [form, setForm] = useState<FormState>({
         host: '',
-        username: '',
-        appPassword: '',
     });
 
-    const [errors, setErrors] = useState<Partial<FormState>>({});
+    const [hostStatus, setHostStatus] = useState<StatusType>();
     const [loading, setLoading] = useState(false);
 
     const setField = (key: keyof FormState, value: string) => {
         setForm((prev) => ({ ...prev, [key]: value }));
-        setErrors((prev) => ({ ...prev, [key]: undefined }));
+        clearError(key)
     };
 
-    const normalizeHost = (raw: string) => {
-        const trimmed = raw.trim();
-        if (!trimmed) return '';
-        // assume https:// if missing
-        if (!/^https?:\/\//i.test(trimmed)) return `https://${trimmed}`;
-        // Strip trailing slash for consistency
-        return trimmed.replace(/\/+$/, '');
-    };
+    const { errors, validateField, validateAll, clearError } =
+        useFormValidation(form, {
+            host: {
+                sync: Server.validateHostFormat,
+                async: async (v: string) => {
+                    const normalised = Server.normaliseHost(v)
+                    if (!normalised) return "Nextcloud server host is required."
 
-    const validate = () => {
-        const next: Partial<FormState> = {};
-        const host = normalizeHost(form.host);
+                    try {
+                        await Server.getServerStatus(normalised)
+                        return undefined
+                    } catch {
+                        return "Could not reach a valid Nextcloud server at this URL."
+                    }
+                },
+            },
+        });
 
-        if (!host) next.host = 'Nextcloud server host is required.';
-        else {
-            try {
-                console.log(new URL(host));
-                new URL(host);
-            } catch {
-                next.host = 'Please enter a valid URL (e.g. https://cloud.example.com).';
-            }
-        }
-
-        if (!form.username.trim()) next.username = 'Username is required.';
-        if (!form.appPassword.trim()) next.appPassword = 'App password is required.';
-
-        setErrors(next);
-        return Object.keys(next).length === 0;
-    };
+    const onHostBlur = async () => {
+        setHostStatus("loading")
+        const ok = await validateField("host")
+        setHostStatus(ok ? "success" : "error")
+    }
 
     const onSubmit = async () => {
-        if (!validate()) return;
-
         setLoading(true);
+        setHostStatus('loading');
+
+        // Validate
+        const validForm = await validateAll()
+        if (!validForm) {
+            setLoading(false);
+            setHostStatus('error');
+            return;
+        }
+
+        // Had to validate to please TSC
+        const normalisedHost = Server.normaliseHost(form.host);
+        if (typeof normalisedHost !== 'string') {
+            setLoading(false);
+            setHostStatus('error');
+            return;
+        }
+
         try {
-            const payload = {
-                host: normalizeHost(form.host),
-                username: form.username.trim(),
-                appPassword: form.appPassword,
-            };
+            const payload = { host: normalisedHost };
 
-            // TODO: Replace with real auth / connectivity check.
-            await new Promise((r) => setTimeout(r, 500));
+            // Get Login URL
+            const authResponse = await Auth.startLoginV2(normalisedHost);
 
+            // Simulate processing
+            await new Promise((r) => setTimeout(r, 5000));
+
+            // Success
             Alert.alert('Submitted', JSON.stringify(payload, null, 2));
             signIn();
+        } catch (err: unknown) {
+            if (err instanceof TypeError) {
+                // Network-level issues (DNS, TLS, offline, CORS)
+                Alert.alert(
+                    'Network Error',
+                    'Unable to reach the server. Please check your internet connection or server address.'
+                );
+            } else if (err instanceof HttpError) {
+                // Server responded with non-2xx
+                Alert.alert(
+                    `Server Error (${err.status})`,
+                    `The server responded with an error:\n${JSON.stringify(err.body) || 'Unknown error'}`
+                );
+            } else if (err instanceof Error) {
+                // JSON parse errors or validation errors (includes invalid LoginV2Response)
+                Alert.alert(
+                    'Unexpected Response',
+                    err.message || 'The server returned an unexpected response.'
+                );
+            } else {
+                // Fallback for unknown types
+                Alert.alert('Unknown Error', 'An unexpected error occurred.');
+            }
         } finally {
             setLoading(false);
         }
@@ -83,9 +115,7 @@ export default function LoginScreen() {
 
     const isDisabled =
         loading ||
-        !form.host.trim() ||
-        !form.username.trim() ||
-        !form.appPassword.trim();
+        !form.host.trim()
 
     return (
         <View style={styles.container}>
@@ -99,35 +129,11 @@ export default function LoginScreen() {
                 textContentType="URL"
                 value={form.host}
                 onChangeText={(t) => setField('host', t)}
+                onBlur={onHostBlur}
+                status={hostStatus}
                 error={errors.host}
-                hint="Include https:// (we’ll add it if you don’t)."
+                hint="Include https:// (we'll add it if you don't)."
                 returnKeyType="next"
-            />
-
-            <Input
-                label="Username"
-                placeholder="jane.doe"
-                autoCapitalize="none"
-                autoCorrect={false}
-                textContentType="username"
-                value={form.username}
-                onChangeText={(t) => setField('username', t)}
-                error={errors.username}
-                returnKeyType="next"
-            />
-
-            <Input
-                label="App Password"
-                placeholder="••••••••••••••••"
-                autoCapitalize="none"
-                autoCorrect={false}
-                secureTextEntry
-                textContentType="password"
-                value={form.appPassword}
-                onChangeText={(t) => setField('appPassword', t)}
-                error={errors.appPassword}
-                returnKeyType="done"
-                onSubmitEditing={onSubmit}
             />
 
             <Button
